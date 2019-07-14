@@ -1,5 +1,7 @@
 package interviewTop100;
 
+import java.util.HashMap;
+
 public class leetcode13
 {
 	/**
@@ -24,7 +26,38 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。
 
 	 */
+	
+	/*
+	 * 哈希算法
+	 */
 	 public int romanToInt(String s) {
-	        
-	    }
+	   if(s==null || s.length()==0) return 0;
+	   
+	   HashMap<String, Integer> map = new HashMap<>();
+	   map.put("I", 1);
+	   map.put("IV", 4);
+	   map.put("V", 5);
+	   map.put("IX", 9);
+	   map.put("X", 10);
+	   map.put("XL", 40);
+	   map.put("L", 50);
+	   map.put("XC", 90);
+	   map.put("C", 100);
+	   map.put("CD", 400);
+	   map.put("D", 500);
+	   map.put("CM", 900);
+	   map.put("M", 1000);
+
+	   int res = 0;
+	   for(int i=0;i<s.length();) {
+		   if(i+1<s.length() && map.containsKey(s.substring(i, i+2))) {
+			   res += map.get(s.substring(i,i+2));
+			   i=i+2;
+		   }else {
+			   res+=map.get(s.substring(i,i+1));
+			   i++;
+		   }
+	   }
+		   return res;
+	 }
 }
