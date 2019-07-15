@@ -32,6 +32,7 @@ public class leetcode70
 	    return climbStairs(n-1)+climbStairs(n-2);
 	 }
 	 
+	 //dp
 	 public int climbStairsII(int n) {
 		 int[] dp = new int[n+1];	
 		 dp[0] = 1;
