@@ -19,23 +19,25 @@ public class leetcode105
 
 	 */
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
-		int preLen = preorder.length;
-		int inLen = inorder.length;
-		return helper(preorder,0,preLen-1,inorder,0,inLen-1);
-	}
+        return buildTree(preorder, 0, preorder.length-1, inorder, 0, inorder.length - 1);
+    }
 
-	private TreeNode helper(int[] preorder,int preL, int preR,int[] inorder,int inL, int inR) {
-		if (preL > preR || inL > inR) return null;	
-		
-		int rootVal = preorder[preL];
-		int l = inL;
-		while (l <= inR && inorder[l] != rootVal) l++;
-		
-		TreeNode root = new TreeNode(rootVal);
-		root.left = helper(preorder, preL + 1, preL + l - inL, inorder, inL, l - 1);
-		root.right = helper(preorder, preL + l - inL + 1, preR, inorder, l + 1, inR);
-		return root;
-	}
-
+    private TreeNode buildTree(int[] preorder, int ps, int pe, int[] inorder, int is, int ie) {
+        if (ps > pe) {
+            return null;
+        }
+        // 前序遍历第一个节点为根节点
+        int rootVal = preorder[ps];
+        TreeNode root = new TreeNode(rootVal);
+        // 确定根节点在中序遍历中的位置
+        int im = is;
+        while (im < ie && inorder[im] != rootVal) {
+            im++;
+        }
+        // 根据根节点在中序遍历中的位置得到左右子树的前序遍历和中序遍历序列
+        root.left = buildTree(preorder, ps + 1, ps + im - is, inorder, is, im - 1);
+        root.right = buildTree(preorder, ps + im - is + 1, pe, inorder, im + 1, ie);
+        return root;
+    }
 
 }

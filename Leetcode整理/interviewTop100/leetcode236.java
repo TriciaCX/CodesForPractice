@@ -112,4 +112,51 @@ public class leetcode236
         	q = parent.get(q);
         return q;
 	}
+	
+	
+	//DFS回溯
+	/**
+	 * 对二叉树做后序遍历，回溯：
+	 * 回溯时：捕获mid，即当前节点是否为P或Q;
+	 * 当left right mid中有两个为true时，说明当前节点是最近的公共节点，记录至res
+	 * 返回值：左子树或右子树或当前节点中包含p或q
+	 * 最终返回最近公共节点res
+	 */
+	
+	class SolutionII {
+	    
+		TreeNode res = null;
+	    
+	    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+	        dfs(root, p, q);
+	        return res;
+	    }
+	    
+	    private int dfs(TreeNode root, TreeNode p, TreeNode q){
+	        if(root == null) return 0;
+	        int left = dfs(root.left, p, q);
+	        int right = dfs(root.right, p, q);
+	        int mid = root == p || root == q ? 1 : 0;  //当前节点是否是p或q
+	        if(left + right + mid > 1) res = root;
+	        return left + right + mid > 0 ? 1 : 0;
+	    }
+	}
+	
+	
+	class SolutionIII{
+		TreeNode res = null;
+		public TreeNode lowestCommonAncestor(TreeNode root,TreeNode p,TreeNode q) {
+			dfs(root, p, q);
+			return res;
+		}
+
+		private int dfs(TreeNode root, TreeNode p, TreeNode q){
+			if(root==null) return 0;
+			int left = dfs(root.left, p, q);
+			int right = dfs(root.right, p, q);
+			int mid = root==p ||root==q?1:0;
+			if(left+mid+right>1) res = root;
+			return left+mid+right>0? 1:0;
+		}
+	}
 }
