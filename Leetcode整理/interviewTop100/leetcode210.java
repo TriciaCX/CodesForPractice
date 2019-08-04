@@ -38,39 +38,40 @@ public class leetcode210
 拓扑排序也可以通过 BFS 完成。
 
  */
-	 public int[] findOrder(int numCourses, int[][] prerequisites) {
-			int[] res = new int[numCourses];
-			int pLen = prerequisites.length;
-			int[] indegree = new int[numCourses];
-			for(int[] p:prerequisites) {
-	           indegree[p[0]]++;
-			}
-			LinkedList<Integer> queue = new LinkedList<>();
-			for(Integer i:indegree) {
-				if(indegree[i]==0) {
-					queue.addLast(i);
-				}
-			}
-			//拓扑排序
-			ArrayList<Integer> list = new ArrayList<>();
-			while(!queue.isEmpty()) {
-				Integer num = queue.removeFirst(); 
-				list.add(num);
-				for(int[] p:prerequisites) {
-					if(p[1]==num) {
-						indegree[p[0]]--;
-						if(indegree[p[0]]==0) {
-	                        queue.addLast(p[0]);
-	                    }    
-	                }
-	            }
-			}
-			for(int i=0;i<list.size();i++) {
-				res[i] = list.get(i);
-			}
-			return res;
-		}
-	
+//	 public int[] findOrder(int numCourses, int[][] prerequisites) {
+//			int[] res = new int[numCourses];
+//			int[] indegree = new int[numCourses];
+//			for(int[] p:prerequisites) {
+//	           indegree[p[0]]++;
+//			}
+//			LinkedList<Integer> queue = new LinkedList<>();
+//			for(Integer i:indegree) {
+//				if(indegree[i]==0) {
+//					queue.addLast(i);
+//				}
+//			}
+//			//拓扑排序
+//			ArrayList<Integer> list = new ArrayList<>();
+//			while(!queue.isEmpty()) {
+//				Integer num = queue.removeFirst(); 
+//				list.add(num);
+//				for(int[] p:prerequisites) {
+//					if(p[1]==num) {
+//						indegree[p[0]]--;
+//						if(indegree[p[0]]==0) {
+//	                        queue.addLast(p[0]);
+//	                    }    
+//	                }
+//	            }
+//			}
+//			if(list.size()!=numCourses)
+//				return new int[0];
+//			for(int i=0;i<list.size();i++) {
+//				res[i] = list.get(i);
+//			}
+//			return res;
+//		}
+//	
 	class Solution {
 		 public int[] findOrder(int numCourses, int[][] prerequisites) {
 		    	int[] indegree=new int[numCourses];
