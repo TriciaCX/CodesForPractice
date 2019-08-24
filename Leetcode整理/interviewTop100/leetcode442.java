@@ -31,9 +31,9 @@ public class leetcode442
         	return list;
         for(int num:nums) {
         	if(nums[Math.abs(num) - 1]>0) {
-        		nums[Math.abs(num)-1]*=-1;
+        		nums[Math.abs(num) -1]*=-1; //用负数表示这个坑被占了
         	}else {
-        		list.add(Math.abs(num));
+        		list.add(Math.abs(num)); //负负得正，即是出现了两次
         	}
         }
         
