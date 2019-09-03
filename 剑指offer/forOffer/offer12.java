@@ -16,6 +16,7 @@ public class offer12 {
         System.out.println(hasPath(matrix,3,4,str));
     }
 
+    //回溯
     public static  boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
        if(matrix==null ||matrix.length==0 || rows<=0 || cols<=0 || str==null)
            return false;
