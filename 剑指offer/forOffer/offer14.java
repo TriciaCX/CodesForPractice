@@ -12,7 +12,7 @@ public class offer14 {
      * return 36 (10 = 3 + 3 + 4)
      */
 
-    //f(n)=max(f(i)*f(n-i)),i=1,...,n-1
+    //f(n)=max(f(i)*f(n-i)),i=1,...,n-1   剪出来的第一段绳子的长度可能是1,2,3,..，n-1
     public int integerBreakI(int n) {
         int[] dp = new int[n + 1];
         dp[1] = 1;
